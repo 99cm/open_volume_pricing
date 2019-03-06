@@ -1,5 +1,8 @@
 require 'simplecov'
-SimpleCov.start 'rails'
+SimpleCov.start 'rails' do
+  add_filter "/lib/generators"
+  add_filter "/lib/open_volume_pricing"
+end
 
 ENV['RAILS_ENV'] ||= 'test'
 

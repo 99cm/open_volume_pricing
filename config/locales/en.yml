@@ -1,18 +1,22 @@
 ---
 en:
-  spree:
-    add_volume_price: Add Volume Price
-    position: Position
-    discount_type: Discount Type
-    range: Range
-    volume_prices: Volume Prices
-    volume_pricing: Volume Pricing
-    price_discount: Price Discount
-    percent_discount: Percent Discount
-    bulk_discount: Bulk Discount
   activerecord:
     errors:
       messages:
         could_not_conver_to_range: "Couldn't convert to Range: %{number}"
         is_not_a_valid_volume_price_type: '%{value} is not a valid Volume Price Type'
         must_be_in_format: 'must be in one of the following formats: (a..b), (a...b), (a+)'
+  spree:
+    add_volume_price: Add Volume Price
+    bulk_discount: Bulk Discount
+    discount_type: Discount Type
+    new_volume_price_model: New Volume Price Model
+    percent_discount: Percent Discount
+    position: Position
+    price_discount: Price Discount
+    range: Range
+    role: Role
+    volume_price_model: Volume Price Model
+    volume_prices: Volume Prices
+    volume_price_model_edit: Edit Volume Price Model
+    volume_pricing: Volume Pricing

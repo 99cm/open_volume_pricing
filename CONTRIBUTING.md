@@ -1,6 +1,6 @@
 # Contributing
 
-Spree Reviews is an open source project and we encourage contributions. Please see the [contributors guidelines](http://spreecommerce.com/documentation/contributing_to_spree.html) for more information before contributing.
+Spree Reviews is an open source project and we encourage contributions.
 
 In the spirit of [free software][1], **everyone** is encouraged to help improve this project.
 
@@ -39,30 +39,6 @@ In 99% of cases, this information is enough to determine the cause and solution 
 
 ---
 
-## Pull requests
-
-We gladly accept pull requests to fix bugs and, in some circumstances, add new features to this extension.
-
-Here's a quick guide:
-
-1. Fork the repo.
-
-2. Run the tests. We only take pull requests with passing tests, and it's great to know that you have a clean slate.
-
-3. Create new branch then make changes and add tests for your changes. Only refactoring and documentation changes require no new tests. If you are adding functionality or fixing a bug, we need tests!
-
-4. Push to your fork and submit a pull request. If the changes will apply cleanly to the latest stable branches and master branch, you will only need to submit one pull request.
-
-At this point you're waiting on us. We may suggest some changes or improvements or alternatives.
-
-Some things that will increase the chance that your pull request is accepted, taken straight from the Ruby on Rails guide:
-
-* Use Rails idioms and helpers.
-* Include tests that fail without your code, and pass with it.
-* Update the documentation, the surrounding one, examples elsewhere, guides, whatever is affected by your contribution.
-
----
-
 ## TL;DR
 
 * Fork the repo
@@ -74,8 +50,6 @@ Some things that will increase the chance that your pull request is accepted, ta
 * Ensure all syntax ok by running `rubocop .`
 * Submit your pull request
 
-And in case we didn't emphasize it enough: **we love tests!**
-
 [1]: http://www.fsf.org/licensing/essays/free-sw.html
-[2]: https://github.com/spree-contrib/spree_volume_pricing/issues
-[3]: https://github.com/spree-contrib/spree_volume_pricing/tree/master/config/locales
+[2]: https://github.com/99cm/open_volume_pricing/issues
+[3]: https://github.com/99cm/open_volume_pricing/tree/master/config/locales

@@ -1,13 +1,8 @@
 class Spree::VolumePrice < ActiveRecord::Base
-  if Gem.loaded_specs['spree_core'].version >= Gem::Version.create('3.3.0')
-    belongs_to :variant, touch: true, optional: true
-    belongs_to :volume_price_model, touch: true, optional: true
-    belongs_to :spree_role, class_name: 'Spree::Role', foreign_key: 'role_id', optional: true
-  else
-    belongs_to :variant, touch: true
-    belongs_to :volume_price_model, touch: true
-    belongs_to :spree_role, class_name: 'Spree::Role', foreign_key: 'role_id'
-  end
+  belongs_to :variant, touch: true, optional: true
+  belongs_to :volume_price_model, touch: true, optional: true
+  belongs_to :spree_role, class_name: 'Spree::Role', foreign_key: 'role_id', optional: true
+
 
   acts_as_list scope: [:variant_id, :volume_price_model_id]
 
@@ -18,25 +13,42 @@ class Spree::VolumePrice < ActiveRecord::Base
               in: %w(price dollar percent),
               message: I18n.t(:'activerecord.errors.messages.is_not_a_valid_volume_price_type', value: self)
             }
-  validates :range,
-            format: {
-              with: /\(?[0-9]+(?:\.{2,3}[0-9]+|\+\)?)/,
-              message: I18n.t(:'activerecord.errors.messages.must_be_in_format')
-            }
+  validates :range_format
 
-  OPEN_ENDED = /\(?[0-9]+\+\)?/
+  def self.for_variant(variant, user: nil)
+    roles = [nil]
+    if user
+      roles << user.resolve_role.try!(:id)
+    end
+
+    where(
+      arel_table[:variant_id].eq(variant.id).
+      or(
+        arel_table[:volume_price_model_id].in(variant.volume_price_model_ids)
+      )
+    ).
+    where(role_id: roles).
+    order(position: :asc, amount: :asc)
+  end
 
   def include?(quantity)
-    if open_ended?
-      bound = /\d+/.match(range)[0].to_i
-      return quantity >= bound
-    else
-      range.to_range === quantity
+    range_from_string.include?(quantity)
+  end
+
+  def display_range
+    range.gsub(/\.+/, "-").gsub(/\(|\)/, '')
+  end
+
+  private
+
+  def range_format
+    if !(OpenVolumePricing::RangeFromString::RANGE_FORMAT =~ range ||
+         OpenVolumePricing::RangeFromString::OPEN_ENDED =~ range)
+      errors.add(:range, :must_be_in_format)
     end
   end
 
-  # indicates whether or not the range is a true Ruby range or an open ended range with no upper bound
-  def open_ended?
-    OPEN_ENDED =~ range
+  def range_from_string
+    OpenVolumePricing::RangeFromString.new(range).to_range
   end
 end
