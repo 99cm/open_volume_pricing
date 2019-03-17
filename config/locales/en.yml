@@ -4,7 +4,7 @@ en:
     errors:
       messages:
         could_not_conver_to_range: "Couldn't convert to Range: %{number}"
-        is_not_a_valid_volume_price_type: '%{value} is not a valid Volume Price Type'
+        is_not_included_in_the_list: 'is not included in the list'
         must_be_in_format: 'must be in one of the following formats: (a..b), (a...b), (a+)'
   spree:
     add_volume_price: Add Volume Price
@@ -19,4 +19,4 @@ en:
     volume_price_model: Volume Price Model
     volume_prices: Volume Prices
     volume_price_model_edit: Edit Volume Price Model
-    volume_pricing: Volume Pricing
+    volume_pricing: Pricing

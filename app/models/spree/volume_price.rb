@@ -1,8 +1,8 @@
-class Spree::VolumePrice < ActiveRecord::Base
-  belongs_to :variant, touch: true, optional: true
-  belongs_to :volume_price_model, touch: true, optional: true
-  belongs_to :spree_role, class_name: 'Spree::Role', foreign_key: 'role_id', optional: true
+class Spree::VolumePrice < Spree::Base
 
+  belongs_to :variant, touch: true, require: false
+  belongs_to :volume_price_model, touch: true, require: false
+  belongs_to :spree_role, class_name: 'Spree::Role', foreign_key: 'role_id', require: false
 
   acts_as_list scope: [:variant_id, :volume_price_model_id]
 
@@ -10,8 +10,8 @@ class Spree::VolumePrice < ActiveRecord::Base
   validates :discount_type,
             presence: true,
             inclusion: {
-              in: %w(price dollar percent),
-              message: I18n.t(:'activerecord.errors.messages.is_not_a_valid_volume_price_type', value: self)
+              in: %w(price),
+              message: I18n.t('activerecord.errors.messages.is_not_included_in_the_list')
             }
   validates :range_format
 
